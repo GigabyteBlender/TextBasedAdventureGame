@@ -1,0 +1,8 @@
+[
+    {"name": "Short Sword", "damage": 5, "speed": 7},
+    {"name": "Longsword", "damage": 8, "speed": 5},
+    {"name": "Dagger", "damage": 3, "speed": 9},
+    {"name": "Battle Axe", "damage": 10, "speed": 3},
+    {"name": "Spear", "damage": 6, "speed": 6},
+    {"name": "Mace", "damage": 7, "speed": 4}
+]

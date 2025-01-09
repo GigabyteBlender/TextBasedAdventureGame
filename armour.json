@@ -1,0 +1,8 @@
+[
+    {"name": "Leather Armour", "defense": 3, "weight": 2},
+    {"name": "Chain Mail", "defense": 5, "weight": 4},
+    {"name": "Plate Armour", "defense": 8, "weight": 7},
+    {"name": "Cloth Robe", "defense": 1, "weight": 1},
+    {"name": "Scale Armour", "defense": 6, "weight": 5},
+    {"name": "Studded Leather", "defense": 4, "weight": 3}
+]
