@@ -2,7 +2,7 @@ import random
 
 def player_combat(floor, player_weapon, player_armor, monster):
     #array to store the damage of each move
-    moves = {'slash': 2+player_weapon.damage, 'stab': player_weapon.damage}
+    moves = {"slash": 2+player_weapon.damage, "stab": player_weapon.damage}
     
     #displays moves
     x = 0
@@ -11,11 +11,12 @@ def player_combat(floor, player_weapon, player_armor, monster):
         print(f'{x}.{move}')
     
     #entering move choic and calculating damage of move
-    choice = input('Enter which attack you want to use (enter name): ')
     try:
-        damage = moves.choice
+        choice = str(input('Enter which attack you want to use (enter name): '))
     except:
-        pass
+        print('Invalid input')
+        
+    damage = moves.get(choice)
     
     print(f'you dealt {damage} to the monster')
     monster.health -= damage

@@ -1,5 +1,7 @@
 from monster import Monster
 from combat import player_combat
+from armoury import Weapon
+from armour import Armour
 import random
 
 def battle_room(floor, player_weapon, player_armor):
