@@ -13,9 +13,10 @@ def load_moves():
     return [Moves(**item) for item in moves_data]
 
 def display_moves(moves_list):
-    print("\nAvailable Armour:")
+    print("\nAvailable moves:\n")
     for i, move in enumerate(moves_list, 1):
         print(f"{i}. {move.name} - Damage: {move.damage}, Speed: {move.speed}")
+    print('\n')
 
 def player_combat(floor, player, monster):
     
