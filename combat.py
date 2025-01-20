@@ -1,19 +1,35 @@
 import random
+import json
+
+class Moves:
+    def __init__(self, name, damage, speed):
+        self.name = name
+        self.damage = damage
+        self.speed = speed
+
+def load_moves():
+    with open('moves.json', 'r') as f:
+        moves_data = json.load(f)
+    return [Moves(**item) for item in moves_data]
+
+def display_moves(moves_list):
+    print("\nAvailable Armour:")
+    for i, move in enumerate(moves_list, 1):
+        print(f"{i}. {move.name} - Damage: {move.damage}, Speed: {move.speed}")
 
 def player_combat(floor, player, monster):
-    # Array to store the damage of each move
-    moves = {"slash": 2 + player.weapon.damage, "stab": player.weapon.damage}
     
     while True:
         # Display moves
-        print("Your moves:")
-        for i, move in enumerate(moves, 1):
-            print(f'{i}. {move}')
+        moves_list = load_moves()
+        display_moves(moves_list)
         
         # Player's turn
         try:
-            choice = input('Enter which attack you want to use (enter name): ')
-            damage = moves.get(choice.lower())
+            choice = input('Enter which attack you want to use (enter number): ')
+            move = moves_list[int(choice) - 1]
+            damage = move.damage
+
             if damage is None:
                 raise ValueError
             print(f'You dealt {damage} damage to the monster')
@@ -36,5 +52,5 @@ def player_combat(floor, player, monster):
             return False, True
         
         print(f'Monster health: {monster.health}')
-        print(f'Your armor durability: {player_armor.durability}')
+        print(f'Your armor durability: {player.armour.durability}')
         print("--------------------")
