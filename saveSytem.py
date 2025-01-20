@@ -29,7 +29,9 @@ def load_player_data(save_name):
     try:
         player_data = persistance.loadGame(save_name)
         print('loaded data succesfully')
+        print(player_data)
         return player_data
+
     except Exception as e:
         print(f"Error loading save file {save_name}: {e}")
         return None
@@ -50,7 +52,8 @@ def choose_option(player):
             save_player_data(player)
             
         elif choice == 'load':
-            player = load_player_data(player.name)
+            save_name = input('enter save name: ')
+            player = load_player_data(save_name)
     except:
         print('error with parsing data')
         pass
