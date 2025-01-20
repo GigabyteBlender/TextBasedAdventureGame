@@ -1,10 +1,11 @@
 import json
 
 class Armour:
-    def __init__(self, name, defense, weight):
+    def __init__(self, name, defense, weight, durability):
         self.name = name
         self.defense = defense
         self.weight = weight
+        self.durability = durability
 
 def load_armour():
     with open('armour.json', 'r') as f:
@@ -14,13 +15,13 @@ def load_armour():
 def display_armour(armour_list):
     print("\nAvailable Armour:")
     for i, armour in enumerate(armour_list, 1):
-        print(f"{i}. {armour.name} - Defense: {armour.defense}, Weight: {armour.weight}")
+        print(f"{i}. {armour.name} - Defense: {armour.defense}, Weight: {armour.weight}, Durability: {armour.durability}")
 
-def armour_room(current_armour):
+def armour_room(player):
     armour_list = load_armour()
     
     while True:
-        print(f"\nYou are in the Armour Room. Current Armour: {current_armour.name}")
+        print(f"\nYou are in the Armour Room. Current Armour: {player.armour.name}")
         print("1. View available armour")
         print("2. Change armour")
         print("3. Return to start room")
@@ -36,12 +37,13 @@ def armour_room(current_armour):
                 continue
             try:
                 new_armour = armour_list[int(armour_choice) - 1]
+                player.armour = new_armour
                 print(f"You have equipped {new_armour.name}.")
-                return "start", new_armour
+                return "start", player
             except (ValueError, IndexError):
                 print("Invalid choice. Please try again.")
         elif choice == '3':
-            return "start", current_armour
+            return "start", player
         else:
             print("Invalid choice. Please try again.")
 

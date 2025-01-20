@@ -16,11 +16,11 @@ def display_weapons(weapon_list):
     for i, weapon in enumerate(weapon_list, 1):
         print(f"{i}. {weapon.name} - Damage: {weapon.damage}, Speed: {weapon.speed}")
 
-def armoury_room(current_weapon):
+def armoury_room(player):
     weapon_list = load_weapons()
     
     while True:
-        print(f"\nYou are in the Armoury. Current Weapon: {current_weapon.name}")
+        print(f"\nYou are in the Armoury. Current Weapon: {player.weapon.name}")
         print("1. View available weapons")
         print("2. Change weapon")
         print("3. Return to start room")
@@ -36,12 +36,13 @@ def armoury_room(current_weapon):
                 continue
             try:
                 new_weapon = weapon_list[int(weapon_choice) - 1]
+                player.weapon = new_weapon
                 print(f"You have equipped {new_weapon.name}.")
-                return "start", new_weapon
+                return "start", player
             except (ValueError, IndexError):
                 print("Invalid choice. Please try again.")
         elif choice == '3':
-            return "start", current_weapon
+            return "start", player
         else:
             print("Invalid choice. Please try again.")
 

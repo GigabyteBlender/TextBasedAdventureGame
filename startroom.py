@@ -4,6 +4,7 @@ def start_room():
     print("2. Enter the Armour Room")
     print("3. Enter the Battle Rooms")
     print("4. Exit the game")
+    print("5. Save or Load game")
     
     while True:
         choice = input("Where would you like to go? ")
@@ -16,5 +17,7 @@ def start_room():
             return "battle"
         elif choice == "4":
             return "exit"
+        elif choice == "5":
+            return "save/load"
         else:
             print("Invalid choice. Please try again.")
