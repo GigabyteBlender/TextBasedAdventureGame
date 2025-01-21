@@ -5,7 +5,7 @@ class Player:
         self.armour = player_armour
         self.age = player_age
         self.hp = 100
-        self.inventory = None
+        self.inventory = {'1': None, '2': None, '3': None, '4': None, '5': None}
         self.current_location = current_room
         self.cleared_floors = cleared_floors
     

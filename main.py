@@ -16,8 +16,8 @@ def main():
             print('cannot use that input')
             
     current_room = "start"
-    player_weapon = Weapon("Basic Sword", 4, 5)
-    player_armour = Armour("Cloth Armor", 2, 1, 12)
+    player_weapon = Weapon("Basic Sword", 4, 5, 'None')
+    player_armour = Armour("Cloth Armor", 2, 1, 12, 'None')
     cleared_floors = 0
 
     player = Player(player_name, player_age, player_armour, player_weapon, cleared_floors, current_room)

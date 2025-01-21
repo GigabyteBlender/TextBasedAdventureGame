@@ -1,11 +1,12 @@
 import json
 
 class Armour:
-    def __init__(self, name, defense, weight, durability):
+    def __init__(self, name, defense, weight, durability, special):
         self.name = name
         self.defense = defense
         self.weight = weight
         self.durability = durability
+        self.special = special
 
 def load_armour():
     with open('armour.json', 'r') as f:
@@ -15,7 +16,7 @@ def load_armour():
 def display_armour(armour_list):
     print("\nAvailable Armour:")
     for i, armour in enumerate(armour_list, 1):
-        print(f"{i}. {armour.name} - Defense: {armour.defense}, Weight: {armour.weight}, Durability: {armour.durability}")
+        print(f"{i}. {armour.name} - Defense: {armour.defense}, Weight: {armour.weight}, Durability: {armour.durability}, Skill: {armour.special}")
 
 def armour_room(player):
     armour_list = load_armour()

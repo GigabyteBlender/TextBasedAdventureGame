@@ -1,11 +1,6 @@
-import random
 import json
-
-class Moves:
-    def __init__(self, name, damage, speed):
-        self.name = name
-        self.damage = damage
-        self.speed = speed
+import random
+from weaponMoves import Moves
 
 def load_moves():
     with open('moves.json', 'r') as f:

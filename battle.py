@@ -1,7 +1,7 @@
 from monster import Monster
 from combat import player_combat
-from armoury import Weapon
-from armour import Armour
+from armoury import Weapon, load_weapons
+from armour import Armour, load_armour
 import random
 
 def battle_room(floor, player):
@@ -25,18 +25,28 @@ def battle_room(floor, player):
     # Weapon drop
     if random.random() < 0.5:  # 50% chance to drop weapon
         print(f"The {monster.name} dropped its {monster.weapon}!")
-        choice = input(f"Do you want to replace your {player.weapon.name} with {monster.weapon}? (yes/no): ")
+        weapon_list = load_weapons()
+        for w in weapon_list:
+            if w.name == monster.weapon:
+                weapon = w
+        
+        choice = input(f"Do you want to replace your {player.weapon.name} with {weapon.name}? (yes/no): ")
         if choice.lower() == 'yes':
-            player.weapon = Weapon(monster.weapon, monster.attack, random.randint(3, 8))
+            player.weapon = weapon
             print(f"You equipped {player.weapon.name}.")
     
     # Armor drop
     if random.random() < 0.5:  # 50% chance to drop armor
         print(f"The {monster.name} dropped its {monster.armor}!")
-        choice = input(f"Do you want to replace your {player.armor.name} with {monster.armor}? (yes/no): ")
+        armour_list = load_armour()
+        for a in armour_list:
+            if a.name == monster.armour:
+                armour = a
+
+        choice = input(f"Do you want to replace your {player.armour.name} with {armour.name}? (yes/no): ")
         if choice.lower() == 'yes':
-            player.armour = Armour(monster.armor, monster.attack // 2, random.randint(2, 7))
-            print(f"You equipped {player.armor.name}.")
+            player.armour = armour
+            print(f"You equipped {player.armour.name}.")
     
     return True, player  # Return True if the player wins the battle, along with updated equipment
 

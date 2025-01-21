@@ -1,10 +1,11 @@
 import json
 
 class Weapon:
-    def __init__(self, name, damage, speed):
+    def __init__(self, name, damage, speed, special):
         self.name = name
         self.damage = damage
         self.speed = speed
+        self.special = special
 
 def load_weapons():
     with open('weapons.json', 'r') as f:
@@ -14,7 +15,7 @@ def load_weapons():
 def display_weapons(weapon_list):
     print("\nAvailable Weapons:")
     for i, weapon in enumerate(weapon_list, 1):
-        print(f"{i}. {weapon.name} - Damage: {weapon.damage}, Speed: {weapon.speed}")
+        print(f"{i}. {weapon.name} - Damage: {weapon.damage}, Speed: {weapon.speed}, Ability: {weapon.special}")
 
 def armoury_room(player):
     weapon_list = load_weapons()
