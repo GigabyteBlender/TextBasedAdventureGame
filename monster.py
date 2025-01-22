@@ -20,7 +20,7 @@ class Monster:
             ("Vampire", 55, 11, "Blood Drinker", "Noble's Cloak"),
             ("Dragon", 100, 15, "Dragon Fang", "Dragon Scales"),
             ("Demon", 80, 14, "Hellfire Blade", "Infernal Plate"),
-            ("Lich", 70, 13, "Soul Stealer", "Necromancer Robes")
+            ("Lich", 70, 23, "Soul Stealer", "Necromancer Robes")
         ]
         name, base_health, base_attack, weapon, armor = monsters[min(floor - 1, len(monsters) - 1)]
         health = base_health + (floor * 10)

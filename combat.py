@@ -11,10 +11,11 @@ def display_moves(moves_list):
     print("\nAvailable moves:\n")
     for i, move in enumerate(moves_list, 1):
         print(f"{i}. {move.name} - Damage: {move.damage}, Speed: {move.speed}")
-    print('\n')
 
 def player_combat(floor, player, monster):
     
+    monster.health *= floor
+
     while True:
         # Display moves
         moves_list = load_moves()
@@ -22,7 +23,7 @@ def player_combat(floor, player, monster):
         
         # Player's turn
         try:
-            choice = input('Enter which attack you want to use (enter number): ')
+            choice = input('\nEnter which attack you want to use (enter number): ')
             move = moves_list[int(choice) - 1]
             damage = move.damage
 
@@ -32,7 +33,7 @@ def player_combat(floor, player, monster):
             monster.health -= damage
             
             if monster.health <= 0:
-                return True, False
+                return True, False, False
         except ValueError:
             print('Invalid input. Try again.')
             continue
@@ -44,9 +45,14 @@ def player_combat(floor, player, monster):
         player.armour.durability -= player_damage_taken
         
         if player.armour.durability <= 0:
+            player.hp -= abs(player.armour.durability)
+            player.armour.durability = 0
             print("Your armor has been destroyed!")
-            return False, True
+            if player.hp <= 0:
+                return False, True, True
+            else:
+                return False, True, False
         
         print(f'Monster health: {monster.health}')
-        print(f'Your armor durability: {player.armour.durability}')
-        print("--------------------")
+        print(f'Your armor durability: {player.armour.durability}, Your current health: {player.hp}')
+        print("----------------------------------")

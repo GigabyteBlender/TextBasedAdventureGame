@@ -21,6 +21,7 @@ def main():
     cleared_floors = 0
 
     player = Player(player_name, player_age, player_armour, player_weapon, cleared_floors, current_room)
+    floor = 1
     
     while True:
         if current_room == "start":
@@ -34,7 +35,7 @@ def main():
                 print("you cannot enter the room with broken armour")
                 current_room = "start"
             else:
-                current_room, player = battle_rooms(player)
+                current_room, player, floor = battle_rooms(player, floor)
         elif current_room == "save/load":
             current_room, player = choose_option(player)
         elif current_room == "exit":
