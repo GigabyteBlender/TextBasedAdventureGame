@@ -6,15 +6,22 @@ class GamePersistence:
   def __init__(self, dbName="game.db"):
     self.db = sqlite3.connect(dbName)
     self.cursor = self.db.cursor()
+
     res = self.cursor.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='game_saves'"
     )
     if res.fetchone() is None:
-      self.initSchema()
+      self.initSchema('game_saves')
 
-  def initSchema(self):
+    res = self.cursor.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='text_saves'"
+    )
+    if res.fetchone() is None:
+      self.initSchema('text_saves')
+
+  def initSchema(self, name):
     self.cursor.execute(
-        "CREATE TABLE game_saves(id INTEGER PRIMARY KEY, name TEXT NOT NULL, data TEXT, date_created TEXT NOT NULL)"
+        f"CREATE TABLE {name}(id INTEGER PRIMARY KEY, name TEXT NOT NULL, data TEXT, date_created TEXT NOT NULL)"
     )
     # other tables like rooms, items, can be initialised here
 
@@ -26,6 +33,20 @@ class GamePersistence:
 
   def loadGame(self, save_name):
     self.cursor.execute("SELECT data FROM game_saves WHERE name=?",
+                        (save_name, ))
+    data = self.cursor.fetchone()
+    if data is None:
+      return None
+    return json.loads(data[0])
+  
+  def saveData(self, name, data, table_name):
+    self.cursor.execute(
+        f"INSERT INTO {table_name}(name, data, date_created) VALUES(?, ?, datetime('now'))",
+        (name, json.dumps(data, default=vars)))
+    self.db.commit()
+
+  def loadData(self, save_name, table_name):
+    self.cursor.execute(f"SELECT data FROM {table_name} WHERE name=?",
                         (save_name, ))
     data = self.cursor.fetchone()
     if data is None:

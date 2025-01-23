@@ -1,7 +1,29 @@
 from persistance import GamePersistence
+import os
 
 persistance = GamePersistence()
 
+def save_text_data():
+    #saving the text files into the database
+    save_name = 'text_data'
+    # Define the folder path
+    folder_path = 'text'
+
+    # Initialize the save_data dictionary
+    save_data = {}
+
+    # Iterate through files in the folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.txt'):
+            file_path = os.path.join(folder_path, filename)
+            with open(file_path, 'r') as file:
+                content = file.read()
+                save_data[filename] = content
+
+    try:
+        persistance.saveData(save_name, save_data, 'text_saves')
+    except Exception as e:
+        print(f"error saving text files: {e}")
 
 def save_player_data(player):
     """Saves the player's data to Object Storage."""
@@ -19,10 +41,9 @@ def save_player_data(player):
     print('saving data')
     try:
         persistance.saveGame(player.name, player_data)
-    except:
-        print('error saving')
+    except Exception as e:
+        print(f'error saving: {e}')
     print('saved data')
-
 
 def load_player_data(save_name):
     """Loads the player's data from Object Storage."""
