@@ -1,4 +1,5 @@
 class Player:
+    # Player class to store player information
     def __init__(self, player_name, player_age, player_armour, player_weapon, cleared_floors, current_room):
         self.name = player_name
         self.weapon = player_weapon

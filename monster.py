@@ -2,6 +2,7 @@ import random
 
 class Monster:
     def __init__(self, name, health, attack, weapon, armor):
+        # Initialize the Monster object with name, health, attack, weapon, and armor
         self.name = name
         self.health = health
         self.attack = attack
@@ -10,6 +11,7 @@ class Monster:
 
     @staticmethod
     def generate_monster(floor):
+        # List of predefined monsters with their attributes
         monsters = [
             ("Goblin", 20, 5, "Rusty Dagger", "Tattered Leather"),
             ("Orc", 30, 8, "Crude Axe", "Hide Armor"),
@@ -22,8 +24,10 @@ class Monster:
             ("Demon", 80, 14, "Hellfire Blade", "Infernal Plate"),
             ("Lich", 70, 23, "Soul Stealer", "Necromancer Robes")
         ]
+        # Select the monster based on the floor level, ensuring the index is within bounds
         name, base_health, base_attack, weapon, armor = monsters[min(floor - 1, len(monsters) - 1)]
+        # Increase health and attack based on the floor level
         health = base_health + (floor * 10)
         attack = base_attack + floor
+        # Return a new Monster object with the calculated attributes
         return Monster(name, health, attack, weapon, armor)
-

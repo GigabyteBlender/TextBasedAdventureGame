@@ -5,13 +5,15 @@ from battle import battle_rooms
 from saveSytem import choose_option, save_text_data
 from player import Player
 
-
 def main():
+    '''Main function to run the game'''
 
-    '''Only call save_text_data() once to save the text data to the database'''
-    #save_text_data()
+    # Uncomment the line below to save the text data to the database
+    # save_text_data()
     
     print("Welcome to the Tower of Trials!")
+    
+    # Get player name and age with input validation
     while True:
         try:
             player_name = input('Enter your player name: ')
@@ -19,15 +21,18 @@ def main():
             break
         except:
             print('cannot use that input')
-            
+    
+    # Initialize game variables
     current_room = "start"
     player_weapon = Weapon("Basic Sword", 4, 5, 'None')
     player_armour = Armour("Cloth Armor", 2, 1, 12, 'None')
     cleared_floors = 0
 
+    # Create player object
     player = Player(player_name, player_age, player_armour, player_weapon, cleared_floors, current_room)
     floor = 1
     
+    # Main game loop
     while True:
         if current_room == "start":
             current_room = start_room()
@@ -36,6 +41,7 @@ def main():
         elif current_room == "armour":
             current_room, player = armour_room(player)
         elif current_room == "battle":
+            # Check if player's armour is broken before entering battle
             if player_armour.durability <= 0:
                 print("you cannot enter the room with broken armour")
                 current_room = "start"
