@@ -18,7 +18,7 @@ def save_text_data():
             file_path = os.path.join(folder_path, filename)
             with open(file_path, 'r') as file:
                 content = file.read()
-                save_data[filename] = content
+                save_data[filename[:-4]] = content  # Remove the '.txt' extension
 
     try:
         persistance.saveData(save_name, save_data, 'text_saves')

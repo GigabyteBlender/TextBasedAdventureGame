@@ -2,10 +2,14 @@ from startroom import start_room
 from armoury import armoury_room, Weapon
 from armour import armour_room, Armour
 from battle import battle_rooms
-from saveSytem import choose_option
+from saveSytem import choose_option, save_text_data
 from player import Player
-    
+
+
 def main():
+
+    save_text_data()
+    
     print("Welcome to the Tower of Trials!")
     while True:
         try:
