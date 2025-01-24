@@ -3,20 +3,21 @@ from combat import player_combat
 from armoury import load_weapons
 from armour import load_armour
 import random
-import os
+from persistance import GamePersistence
 
 def battle_room(floor, player):
         
     print(f"\nYou enter Floor {floor} of the Battle Rooms.")
     monster = Monster.generate_monster(floor)
 
-    #prting the
-    cur_path = os.path.dirname(__file__)
-    new_path = os.path.join(str(cur_path), f'text/{(monster.name).lower()}.txt')
+    persistance = GamePersistence()
+    try:
+        text = persistance.loadData('text_data', 'text_saves')
+    except Exception as e:
+        print(f"error loading text files: {e}")
 
-    with open(new_path,'r') as f:
-        data = f.readlines()
-        print('\n'.join(map(str, data)))
+    name = monster.name.lower()
+    print(text.get(name))
 
     print(f"A {monster.name} appears!")
     

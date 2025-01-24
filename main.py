@@ -8,7 +8,8 @@ from player import Player
 
 def main():
 
-    save_text_data()
+    '''Only call save_text_data() once to save the text data to the database'''
+    #save_text_data()
     
     print("Welcome to the Tower of Trials!")
     while True:
