@@ -34,24 +34,29 @@ def main():
     
     # Main game loop
     while True:
-        if current_room == "start":
-            current_room = start_room()
-        elif current_room == "armoury":
-            current_room, player = armoury_room(player)
-        elif current_room == "armour":
-            current_room, player = armour_room(player)
-        elif current_room == "battle":
-            # Check if player's armour is broken before entering battle
-            if player_armour.durability <= 0:
-                print("you cannot enter the room with broken armour")
+        match current_room:
+            case "start":
+                current_room = start_room()
+            case "armoury":
+                current_room, player = armoury_room(player)
+            case "armour":
+                current_room, player = armour_room(player)
+            case "battle":
+                # Check if player's armour is broken before entering battle
+                if player_armour.durability <= 0:
+                    print("you cannot enter the room with broken armour")
+                    current_room = "start"
+                else:
+                    current_room, player, floor = battle_rooms(player, floor)
+            case "save/load":
+                current_room, player = choose_option(player)
+            case "exit":
+                print("Thank you for playing!")
+                break
+            
+            case _:
+                print("Invalid room. Returning to start.")
                 current_room = "start"
-            else:
-                current_room, player, floor = battle_rooms(player, floor)
-        elif current_room == "save/load":
-            current_room, player = choose_option(player)
-        elif current_room == "exit":
-            print("Thank you for playing!")
-            break
 
 if __name__ == "__main__":
     main()

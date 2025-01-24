@@ -37,10 +37,8 @@ def battle_room(floor, player):
     if monster_defeated:
         print(f"You defeated the {monster.name}!")
     if player_defeated:
-        print(f"You were defeated by {monster.name}!")
         return False, player, player_dead
-    if player_dead:
-        return False, player, player_dead
+
     
     # Weapon drop logic
     if random.random() < 0.5:  # 50% chance to drop weapon
@@ -81,14 +79,14 @@ def battle_rooms(player, floor):
         victory, player, player_dead = battle_room(floor, player)
         
         if victory:
-            # Increment the number of cleared floors
+            # Increment the number of cleared floors if the player wins
             player.cleared_floors += 1
             if floor < max_floors:
                 # Ask the player if they want to proceed to the next floor
+                floor += 1
                 choice = input(f"You've completed Floor {floor}. Do you want to proceed to the next floor? (yes/no): ")
                 if choice.lower() != 'yes':
                     print("Returning to the starting room.")
-                    floor += 1
                     return "start", player, floor
             else:
                 # Congratulate the player for completing all floors
