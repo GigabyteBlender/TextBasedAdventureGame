@@ -15,13 +15,17 @@ def battle_room(floor, player):
     # Load text data for the game
     persistance = GamePersistence()
     try:
-        text = persistance.loadData('text_data', 'text_saves')
+        text_data = persistance.loadData('text_data', 'text_saves')
     except Exception as e:
-        print(f"error loading text files: {e}")
+        print(f"Error loading text files: {e}")
+        text_data = {}
 
     # Print the description of the monster
-    name = monster.name.lower()
-    print(text.get(name))
+    monster_name = monster.name.lower()
+    if monster_name in text_data:
+        print(text_data[monster_name])
+    else:
+        print(f"No description available for {monster.name}.")
 
     print(f"A {monster.name} appears!")
     
