@@ -9,7 +9,7 @@ def main():
     '''Main function to run the game'''
 
     # Uncomment the line below to save the text data to the database
-    # save_text_data()
+    save_text_data()
     
     print("Welcome to the Tower of Trials!")
     

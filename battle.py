@@ -21,11 +21,8 @@ def battle_room(floor, player):
         text_data = {}
 
     # Print the description of the monster
-    monster_name = monster.name.lower()
-    if monster_name in text_data:
-        print(text_data[monster_name])
-    else:
-        print(f"No description available for {monster.name}.")
+    name = monster.name.lower()
+    print('\n'+text_data[name])
 
     print(f"A {monster.name} appears!")
     
