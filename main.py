@@ -26,10 +26,12 @@ def main():
     current_room = "start"
     player_weapon = Weapon("Basic Sword", 4, 5, 'None')
     player_armour = Armour("Cloth Armor", 2, 1, 12, 'None')
+    inventory = {'1': None, '2': None, '3': None, '4': None, '5': None}
+    player_hp = 100
     cleared_floors = 0
 
     # Create player object
-    player = Player(player_name, player_age, player_armour, player_weapon, cleared_floors, current_room)
+    player = Player(player_name, player_weapon, player_armour, player_age, player_hp, inventory, cleared_floors, current_room)
     floor = 1
     
     # Main game loop
@@ -53,7 +55,6 @@ def main():
             case "exit":
                 print("Thank you for playing!")
                 break
-            
             case _:
                 print("Invalid room. Returning to start.")
                 current_room = "start"

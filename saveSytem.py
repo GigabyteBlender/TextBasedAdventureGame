@@ -1,5 +1,9 @@
 from persistance import GamePersistence
 import os
+from player import Player
+from armoury import Weapon
+from armour import Armour
+
 
 # Initialize the GamePersistence object
 persistance = GamePersistence()
@@ -54,9 +58,25 @@ def load_player_data(save_name):
     try:
         # Load the player's data from the database
         player_data = persistance.loadGame(save_name)
-        print('loaded data successfully')
-        print(player_data)
-        return player_data
+        
+        player_name = player_data.get("name")
+        
+        weapon_data = player_data.get("weapon")
+        armour_data = player_data.get("armour")
+        player_weapon = Weapon(weapon_data['name'], weapon_data['damage'], weapon_data['speed'], weapon_data['special'])
+        player_armour = Armour(armour_data['name'], armour_data['defense'], armour_data['weight'], armour_data['durability'], armour_data['special'])
+        
+        player_age = player_data.get("age")
+        player_hp = player_data.get("hp")
+        inventory = player_data.get("inventory")
+        cleared_floors = player_data.get("cleared_floors")
+        current_room = player_data.get("current_location")
+        
+        player = Player(player_name, player_weapon, player_armour, player_age, player_hp, inventory, cleared_floors, current_room)
+        
+        print(player)
+        print(f'loaded data from -{player_name}- successfully')
+        return player
     except Exception as e:
         print(f"Error loading save file {save_name}: {e}")
         return None
