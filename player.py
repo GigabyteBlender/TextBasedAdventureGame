@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+
+@dataclass(frozen=False)
 class Player:
     # Player class to store player information
     def __init__(self, player_name, player_weapon, player_armour, player_age, player_hp, inventory, cleared_floors, current_room):

@@ -1,5 +1,7 @@
-import random
+# Description: This file contains the Monster class, which represents a monster in the game.
+from dataclasses import dataclass
 
+@dataclass(frozen=False)
 class Monster:
     def __init__(self, name, health, attack, weapon, armor):
         # Initialize the Monster object with name, health, attack, weapon, and armor

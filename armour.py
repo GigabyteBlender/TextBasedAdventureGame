@@ -1,5 +1,7 @@
 import json
+from dataclasses import dataclass
 
+@dataclass(frozen=False)
 class Armour:
     def __init__(self, name, defense, weight, durability, special):
         self.name = name

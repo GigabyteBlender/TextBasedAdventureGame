@@ -1,6 +1,9 @@
 import json
 
 # Define a Weapon class with attributes for name, damage, speed, and special ability
+from dataclasses import dataclass
+
+@dataclass(frozen=False)
 class Weapon:
     def __init__(self, name, damage, speed, special):
         self.name = name

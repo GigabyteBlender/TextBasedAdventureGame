@@ -62,9 +62,10 @@ def load_player_data(save_name):
         player_name = player_data.get("name")
         
         weapon_data = player_data.get("weapon")
+        player_weapon = Weapon(**weapon_data)
+        
         armour_data = player_data.get("armour")
-        player_weapon = Weapon(weapon_data['name'], weapon_data['damage'], weapon_data['speed'], weapon_data['special'])
-        player_armour = Armour(armour_data['name'], armour_data['defense'], armour_data['weight'], armour_data['durability'], armour_data['special'])
+        player_armour = Armour(**armour_data)
         
         player_age = player_data.get("age")
         player_hp = player_data.get("hp")
@@ -74,7 +75,6 @@ def load_player_data(save_name):
         
         player = Player(player_name, player_weapon, player_armour, player_age, player_hp, inventory, cleared_floors, current_room)
         
-        print(player)
         print(f'loaded data from -{player_name}- successfully')
         return player
     except Exception as e:
